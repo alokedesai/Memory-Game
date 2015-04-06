@@ -17,5 +17,6 @@
     <string name="name_edit_text_hint">Name</string>
     <string name="age_edit_text_hint">Age</string>
     <string name="save_button_text">Save</string>
+    <string name="title_activity_game">GameActivity</string>
 
 </resources>
