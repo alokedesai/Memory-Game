@@ -7,70 +7,10 @@
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context=".MainActivity">
-
-    <LinearLayout
+    <fragment
         android:layout_width="match_parent"
+        android:tag="MainActivityFragment"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/layoutTitle"
-        android:gravity="center">
-
-        <TextView
-            android:text="@string/memory_game_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/welcome_text"
-            android:textSize="24sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/last_practice_num_days"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layoutTitle"
-        android:orientation="vertical"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/new_game_button_text"
-            android:id="@+id/btnNewGame"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/settings_button_text"
-            android:id="@+id/btnSettings"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/tutorial_button_text"
-            android:id="@+id/btnTutorial"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/scores_button_text"
-            android:id="@+id/btnScores"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/about_button_text"
-            android:id="@+id/btnAbout"/>
-    </LinearLayout>
-
+        class="hu.ait.android.aloke.memorygame.fragment.MainActivityFragment"/>
 
 </RelativeLayout>
