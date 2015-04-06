@@ -46,7 +46,6 @@ public class MainActivity extends ActionBarActivity implements DifficultyDialog.
 
     @Override
     public void onDifficultyDialogFragmentResult(String item) {
-        System.out.println("inside main activity");
         Toast.makeText(this, item, Toast.LENGTH_SHORT).show();
     }
 }

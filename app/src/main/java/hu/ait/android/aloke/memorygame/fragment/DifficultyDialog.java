@@ -1,5 +1,6 @@
 package hu.ait.android.aloke.memorygame.fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -26,7 +27,7 @@ public class DifficultyDialog extends DialogFragment implements DialogInterface.
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setItems(levels, null);
+        builder.setItems(levels, this);
 
         builder.setNegativeButton("Cancel", null);
         builder.setTitle("Choose Difficulty");
@@ -36,6 +37,16 @@ public class DifficultyDialog extends DialogFragment implements DialogInterface.
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        System.out.println("inside");
+        difficultyDialogFragmentInterface.onDifficultyDialogFragmentResult(levels[which]);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            difficultyDialogFragmentInterface = (DifficultyDialogFragmentInterface) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement DifficultyDialogFragmentInterface");
+        }
     }
 }
