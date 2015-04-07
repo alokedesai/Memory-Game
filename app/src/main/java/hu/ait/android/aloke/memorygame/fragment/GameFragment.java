@@ -20,12 +20,13 @@ import hu.ait.android.aloke.memorygame.adapter.GameAdapter;
  * Created by Aloke on 4/6/15.
  */
 public class GameFragment extends Fragment {
+    private GridView gridView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.game_fragment, container);
 
-        final GridView gridView = (GridView) rootView.findViewById(R.id.gridView);
+        gridView = (GridView) rootView.findViewById(R.id.gridView);
 
         final GameAdapter adapter = new GameAdapter(getActivity());
         gridView.setAdapter(adapter);
@@ -39,5 +40,9 @@ public class GameFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    private void setDifficulty(int boardSize) {
+        gridView.setNumColumns(boardSize);
     }
 }

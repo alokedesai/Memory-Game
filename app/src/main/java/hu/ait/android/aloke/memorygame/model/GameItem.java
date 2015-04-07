@@ -11,7 +11,9 @@ public class GameItem {
     private SquareType squareType;
 
     public enum SquareType {
-        BANANA(0, R.drawable.banana), APPLE(1, R.drawable.apple);
+        BANANA(0, R.drawable.banana), APPLE(1, R.drawable.apple), STRAWBERRY(2, R.drawable.strawberry),
+        CHERRY(3, R.drawable.strawberry), GRAPE(4, R.drawable.grape), LEMON(5, R.drawable.lemon),
+        WATERMELON(6, R.drawable.watermelon), ORANGE(7, R.drawable.orange);
 
         private int value;
         private int iconId;
