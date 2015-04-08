@@ -1,31 +1,30 @@
 package hu.ait.android.aloke.memorygame;
 
-import android.content.Intent;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
-import hu.ait.android.aloke.memorygame.fragment.DifficultyDialog;
+import hu.ait.android.aloke.memorygame.fragment.ScoreFragment;
 
 
-public class MainActivity extends ActionBarActivity implements DifficultyDialog.DifficultyDialogFragmentInterface {
+public class ScoresActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_scores);
+
+        // initialize fragment
+        ScoreFragment scoreFragment = new ScoreFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.scoresFragmentContainer, scoreFragment).commit();
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_scores, menu);
         return true;
     }
 
@@ -42,13 +41,5 @@ public class MainActivity extends ActionBarActivity implements DifficultyDialog.
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onDifficultyDialogFragmentResult(String item, int numPieces) {
-        // ignore the dificulty for now
-        Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra(GameActivity.BOARD_SIZE, numPieces);
-        startActivity(intent);
     }
 }

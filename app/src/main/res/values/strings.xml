@@ -18,5 +18,14 @@
     <string name="age_edit_text_hint">Age</string>
     <string name="save_button_text">Save</string>
     <string name="title_activity_game">GameActivity</string>
+    <string name="reset_button_text">Reset</string>
+    <string name="click_to_start_text_view_title">Click to Start</string>
+    <string name="you_won_game_over_fragment">You Won!</string>
+    <string name="your_time_game_over_dialog">Your time was: %1$s</string>
+    <string name="title_activity_scores">ScoresActivity</string>
+    <string name="no_high_score">No high scores</string>
+    <string name="restart_dialog_label">Restart</string>
+    <string name="main_menu_dialog">Main Menu</string>
+    <string name="high_scores_dialog_label">High Scores</string>
 
 </resources>

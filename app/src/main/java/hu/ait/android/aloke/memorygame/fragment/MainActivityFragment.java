@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import hu.ait.android.aloke.memorygame.GameActivity;
 import hu.ait.android.aloke.memorygame.R;
+import hu.ait.android.aloke.memorygame.ScoresActivity;
 import hu.ait.android.aloke.memorygame.SettingsActivity;
 
 /**
@@ -38,6 +40,15 @@ public class MainActivityFragment extends Fragment {
             public void onClick(View v) {
                 DifficultyDialog difficultyDialog = new DifficultyDialog();
                 difficultyDialog.show(getActivity().getSupportFragmentManager(), DifficultyDialog.TAG);
+            }
+        });
+
+        Button btnScores = (Button) rootView.findViewById(R.id.btnScores);
+        btnScores.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ScoresActivity.class);
+                startActivity(intent);
             }
         });
 

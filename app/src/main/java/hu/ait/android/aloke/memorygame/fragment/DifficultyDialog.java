@@ -7,6 +7,12 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.util.Pair;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import hu.ait.android.aloke.memorygame.GameActivity;
 
 /**
  * Created by Aloke on 4/6/15.
@@ -15,9 +21,11 @@ public class DifficultyDialog extends DialogFragment implements DialogInterface.
     public static final String TAG = "DifficultyDialog";
 
     private static String[] levels = {"Easy", "Medium", "Hard"};
+    //
+    private static int[] levelSizes = {GameActivity.EASY_GAME, GameActivity.MEDIUM_GAME, GameActivity.HARD_GAME};
 
     public interface DifficultyDialogFragmentInterface {
-        public void onDifficultyDialogFragmentResult(String item);
+        public void onDifficultyDialogFragmentResult(String item, int numPieces);
     }
 
     private DifficultyDialogFragmentInterface difficultyDialogFragmentInterface;
@@ -37,7 +45,7 @@ public class DifficultyDialog extends DialogFragment implements DialogInterface.
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        difficultyDialogFragmentInterface.onDifficultyDialogFragmentResult(levels[which]);
+        difficultyDialogFragmentInterface.onDifficultyDialogFragmentResult(levels[which], levelSizes[which]);
     }
 
     @Override
