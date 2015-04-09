@@ -1,10 +1,13 @@
 package hu.ait.android.aloke.memorygame;
 
+import android.app.ActionBar;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import hu.ait.android.aloke.memorygame.adapter.ScoreFragmentAdapter;
 import hu.ait.android.aloke.memorygame.fragment.ScoreFragment;
 
 
@@ -13,13 +16,17 @@ public class ScoresActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_scores);
 
-        // initialize fragment
-        ScoreFragment scoreFragment = new ScoreFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.scoresFragmentContainer, scoreFragment).commit();
-    }
+        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        pager.setAdapter(new ScoreFragmentAdapter(getSupportFragmentManager()));
+//        // initialize fragment
+//        ScoreFragment scoreFragment = new ScoreFragment();
+//        getSupportFragmentManager().beginTransaction().replace(R.id.scoresFragmentContainer, scoreFragment).commit();
 
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

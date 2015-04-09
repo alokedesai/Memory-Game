@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import hu.ait.android.aloke.memorygame.GameActivity;
 import hu.ait.android.aloke.memorygame.R;
 import hu.ait.android.aloke.memorygame.adapter.ScoreAdapter;
 import hu.ait.android.aloke.memorygame.model.Score;
@@ -16,13 +17,18 @@ import hu.ait.android.aloke.memorygame.model.Score;
  * Created by Aloke on 4/8/15.
  */
 public class ScoreFragment extends android.support.v4.app.ListFragment {
+    public static final String SEARCH_QUERY = "SEARCH_QUERY";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_fragment, container, false);
 
-        List<Score> scores = Score.listAll(Score.class);
+        String searchQuery = getArguments().getString(SEARCH_QUERY, Score.Difficulty.EASY.toString());
+
+        // get all the current scores
+        List<Score> scores = Score.find(Score.class, "difficulty = ?", searchQuery);
         setListAdapter(new ScoreAdapter(getActivity(), scores));
+
         return view;
     }
 }

@@ -154,7 +154,23 @@ public class GameAdapter extends BaseAdapter {
         long ellapsedTime = SystemClock.elapsedRealtime() - ((GameActivity) ctx).getChronometerBase();
 
         String date = getDateAsString();
-        Score score = new Score(readableTime, ellapsedTime, date);
+
+        // get difficuty
+        Score.Difficulty difficulty;
+        switch (numPieces) {
+            case (GameActivity.EASY_GAME):
+                difficulty = Score.Difficulty.EASY;
+                break;
+            case (GameActivity.MEDIUM_GAME):
+                difficulty = Score.Difficulty.MEDIUM;
+                break;
+            case (GameActivity.HARD_GAME):
+                difficulty = Score.Difficulty.HARD;
+            default:
+                difficulty = Score.Difficulty.EASY;
+        }
+
+        Score score = new Score(readableTime, ellapsedTime, date, difficulty);
         score.save();
     }
 
@@ -180,7 +196,6 @@ public class GameAdapter extends BaseAdapter {
             }
         }, 1000);
     }
-
 
     public void resetGame() {
         // reset variables
