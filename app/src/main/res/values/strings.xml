@@ -5,7 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="memory_game_title">Memory Game</string>
-    <string name="welcome_text">Welcome!</string>
+    <string name="welcome_text">Welcome, %1$s!</string>
     <string name="last_practice_num_days">You last practiced [x] days ago</string>
     <string name="new_game_button_text">New Game</string>
     <string name="settings_button_text">Settings</string>
@@ -27,5 +27,6 @@
     <string name="restart_dialog_label">Restart</string>
     <string name="main_menu_dialog">Main Menu</string>
     <string name="high_scores_dialog_label">High Scores</string>
+    <string name="welcome_message_settings">Welcome to the Memory Game! Please fill out the settings before playing.</string>
 
 </resources>

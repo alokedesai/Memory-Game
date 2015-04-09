@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 
 public class SettingsActivity extends ActionBarActivity {
@@ -22,19 +23,21 @@ public class SettingsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        Spinner spinner = (Spinner) findViewById(R.id.spnGender);
-        setAdapterForSpinner(spinner);
-    }
 
-    private void setAdapterForSpinner(final Spinner spinner) {
-        // set the different gender options
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender_array,
-                android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        final Spinner spinner = (Spinner) findViewById(R.id.spnGender);
+        setAdapterForSpinner(spinner);
 
         final EditText etName = (EditText) findViewById(R.id.etName);
         final EditText etAge = (EditText) findViewById(R.id.etAge);
+
+        SharedPreferences sp = getSharedPreferences(SETTINGS_PREF, MODE_PRIVATE);
+        String name = sp.getString(SETTINGS_NAME, null);
+        if (name != null) {
+            // set the form to its old views
+            setTextViews(etName, etAge);
+        } else {
+            showWelcomeView();
+        }
 
         Button btnSave = (Button) findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -47,11 +50,36 @@ public class SettingsActivity extends ActionBarActivity {
                 } else {
                     // save to shared preferences
                     saveSettings(etName, spinner, etAge);
+
+                    setResult(RESULT_OK);
                     finish();
                 }
             }
         });
 
+    }
+
+    private void setTextViews(EditText etName, EditText etAge) {
+        SharedPreferences sp = getSharedPreferences(SETTINGS_PREF, MODE_PRIVATE);
+        String name = sp.getString(SETTINGS_NAME, null);
+        String age = sp.getString(SETTINGS_AGE, "");
+
+        etName.setText(name);
+        etAge.setText(age);
+    }
+
+    private void showWelcomeView() {
+        // show the welcome view
+        TextView tvWelcomeMessageSettings = (TextView) findViewById(R.id.tvWelcomeMessageSettings);
+        tvWelcomeMessageSettings.setVisibility(View.VISIBLE);
+    }
+
+    private void setAdapterForSpinner(final Spinner spinner) {
+        // set the different gender options
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender_array,
+                android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
 
     private void saveSettings(EditText etName, Spinner spinner, EditText etAge) {

@@ -36,36 +36,17 @@ public class GameAdapter extends BaseAdapter {
     private boolean gameStarted = false;
     private Context ctx;
 
-    private ArrayList<Pair<Integer, GameItem.SquareType>> imageOptions = new ArrayList<>(Arrays.asList(
-            new Pair<>(R.drawable.apple, GameItem.SquareType.APPLE),
-            new Pair<>(R.drawable.banana, GameItem.SquareType.BANANA),
-            new Pair<>(R.drawable.cherry, GameItem.SquareType.CHERRY),
-            new Pair<>(R.drawable.watermelon, GameItem.SquareType.WATERMELON),
-            new Pair<>(R.drawable.orange, GameItem.SquareType.ORANGE),
-            new Pair<>(R.drawable.grape, GameItem.SquareType.GRAPE),
-            new Pair<>(R.drawable.strawberry, GameItem.SquareType.STRAWBERRY),
-            new Pair<>(R.drawable.lemon, GameItem.SquareType.LEMON),
-            new Pair<>(R.drawable.kiwi, GameItem.SquareType.KIWI),
-            new Pair<>(R.drawable.lime, GameItem.SquareType.LIME),
-            new Pair<>(R.drawable.raspberry, GameItem.SquareType.RASPBERRY),
-            new Pair<>(R.drawable.mango, GameItem.SquareType.MANGO),
-            new Pair<>(R.drawable.coconut, GameItem.SquareType.COCONUT),
-            new Pair<>(R.drawable.grapefruit, GameItem.SquareType.GRAPEFRUIT),
-            new Pair<>(R.drawable.peach, GameItem.SquareType.PEACH),
-            new Pair<>(R.drawable.pear, GameItem.SquareType.PEAR),
-            new Pair<>(R.drawable.lemon, GameItem.SquareType.LEMON),
-            new Pair<>(R.drawable.pineapple, GameItem.SquareType.PINEAPPLE)
-    ));
-
     public GameAdapter(Context ctx, int numPieces) {
         this.ctx = ctx;
         this.numPieces = numPieces;
         numPiecesLeft = numPieces;
 
+        GameItem.SquareType.values();
         // populate images
         for (int i = 0; i < numPieces; i++) {
-            images.add(new GameItem(imageOptions.get(i).first, imageOptions.get(i).second));
-            images.add(new GameItem(imageOptions.get(i).first, imageOptions.get(i).second));
+            GameItem.SquareType type = GameItem.SquareType.values()[i];
+            images.add(new GameItem(type));
+            images.add(new GameItem(type));
         }
 
         Collections.shuffle(images);
@@ -92,7 +73,7 @@ public class GameAdapter extends BaseAdapter {
         if (convertView == null) {
             imageView = new ImageView(ctx);
             imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             imageView.setPadding(8, 8, 8, 8);
         } else {
             imageView = (ImageView) convertView;

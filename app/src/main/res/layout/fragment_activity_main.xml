@@ -22,15 +22,12 @@
             android:textSize="30sp"/>
 
         <TextView
+            android:id="@+id/tvWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/welcome_text"
             android:textSize="24sp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/last_practice_num_days"/>
     </LinearLayout>
 
     <LinearLayout
