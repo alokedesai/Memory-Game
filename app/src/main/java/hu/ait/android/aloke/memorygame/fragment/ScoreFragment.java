@@ -26,7 +26,7 @@ public class ScoreFragment extends android.support.v4.app.ListFragment {
         String searchQuery = getArguments().getString(SEARCH_QUERY, Score.Difficulty.EASY.toString());
 
         // get all the current scores
-        List<Score> scores = Score.find(Score.class, "difficulty = ?", searchQuery);
+        List<Score> scores = Score.find(Score.class, "difficulty = ?", new String[]{searchQuery},null, "num_milis ASC", "5");
         setListAdapter(new ScoreAdapter(getActivity(), scores));
 
         return view;

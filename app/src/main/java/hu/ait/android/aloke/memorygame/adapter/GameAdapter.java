@@ -152,7 +152,6 @@ public class GameAdapter extends BaseAdapter {
 
     private void createScore(String readableTime) {
         long ellapsedTime = SystemClock.elapsedRealtime() - ((GameActivity) ctx).getChronometerBase();
-
         String date = getDateAsString();
 
         // get difficuty
@@ -171,11 +170,12 @@ public class GameAdapter extends BaseAdapter {
         }
 
         Score score = new Score(readableTime, ellapsedTime, date, difficulty);
+
         score.save();
     }
 
     private String getDateAsString() {
-        SimpleDateFormat sdfDate = new SimpleDateFormat("MM/dd/yyyy 'at' hh:mm a");
+        SimpleDateFormat sdfDate = new SimpleDateFormat("MM/dd/yyyy");
         Date now = new Date();
         return sdfDate.format(now);
     }

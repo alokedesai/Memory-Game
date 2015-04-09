@@ -7,8 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvTime"
-        android:textSize="15sp"
-        android:text="First"
+        android:textSize="20sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
@@ -17,8 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvDate"
-        android:text="Second"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:layout_alignBottom="@+id/tvTime"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
