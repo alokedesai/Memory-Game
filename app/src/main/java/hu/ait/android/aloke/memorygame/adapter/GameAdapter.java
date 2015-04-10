@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v4.util.Pair;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -69,19 +70,25 @@ public class GameAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
-        if (convertView == null) {
-            imageView = new ImageView(ctx);
-            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            imageView.setPadding(8, 8, 8, 8);
-        } else {
-            imageView = (ImageView) convertView;
+        View v = convertView;
+        if (v == null) {
+            v = LayoutInflater.from(ctx).inflate(R.layout.grid_cell_layout, null);
+            ImageView ivMain = (ImageView) v.findViewById(R.id.ivMain);
+
+            //set View holder
+            ViewHolder holder = new ViewHolder();
+            holder.ivMain = ivMain;
+            v.setTag(holder);
         }
 
-        imageView.setImageResource(images.get(position).getImageResource());
+        GameItem currentItem = images.get(position);
 
-        return imageView;
+        if (currentItem != null) {
+            ViewHolder holder = (ViewHolder) v.getTag();
+            holder.ivMain.setImageResource(images.get(position).getImageResource());
+        }
+
+        return v;
     }
 
     //TODO: clean up this method, extract into other methods
@@ -146,12 +153,12 @@ public class GameAdapter extends BaseAdapter {
                 break;
             case (GameActivity.HARD_GAME):
                 difficulty = Score.Difficulty.HARD;
+                break;
             default:
                 difficulty = Score.Difficulty.EASY;
         }
 
         Score score = new Score(readableTime, ellapsedTime, date, difficulty);
-
         score.save();
     }
 
@@ -195,6 +202,10 @@ public class GameAdapter extends BaseAdapter {
         // reshuffle the items
         Collections.shuffle(images);
         notifyDataSetChanged();
+    }
+
+    public static class ViewHolder{
+        public ImageView ivMain;
     }
 
 }
