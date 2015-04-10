@@ -142,7 +142,7 @@ public class GameAdapter extends BaseAdapter {
         long ellapsedTime = SystemClock.elapsedRealtime() - ((GameActivity) ctx).getChronometerBase();
         String date = getDateAsString();
 
-        // get difficuty
+        // get difficulty
         Score.Difficulty difficulty;
         switch (numPieces) {
             case (GameActivity.EASY_GAME):

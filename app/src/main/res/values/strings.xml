@@ -28,5 +28,6 @@
     <string name="main_menu_dialog">Main Menu</string>
     <string name="high_scores_dialog_label">High Scores</string>
     <string name="welcome_message_settings">Welcome to the Memory Game! Please fill out the settings before playing.</string>
+    <string name="title_activity_tutorial">TutorialActivity</string>
 
 </resources>

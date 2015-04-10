@@ -21,11 +21,6 @@ public class ScoresActivity extends ActionBarActivity {
 
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(new ScoreFragmentAdapter(getSupportFragmentManager()));
-//        // initialize fragment
-//        ScoreFragment scoreFragment = new ScoreFragment();
-//        getSupportFragmentManager().beginTransaction().replace(R.id.scoresFragmentContainer, scoreFragment).commit();
-
-
     }
 
     @Override
