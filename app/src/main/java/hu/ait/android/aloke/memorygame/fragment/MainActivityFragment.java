@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import hu.ait.android.aloke.memorygame.GameActivity;
 import hu.ait.android.aloke.memorygame.MainActivity;
@@ -57,6 +58,14 @@ public class MainActivityFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ScoresActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        Button btnAbout = (Button) rootView.findViewById(R.id.btnAbout);
+        btnAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "© Aloke Desai, 2015",Toast.LENGTH_LONG).show();
             }
         });
 
