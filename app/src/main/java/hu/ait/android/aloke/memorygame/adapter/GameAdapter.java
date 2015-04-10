@@ -196,4 +196,5 @@ public class GameAdapter extends BaseAdapter {
         Collections.shuffle(images);
         notifyDataSetChanged();
     }
+
 }

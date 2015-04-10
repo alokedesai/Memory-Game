@@ -98,4 +98,8 @@ public class GameFragment extends Fragment {
     public long getChronometerBase() {
         return chronometer.getBase();
     }
+
+    public void restartChronometer() {
+        chronometer.start();
+    }
 }

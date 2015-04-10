@@ -87,4 +87,16 @@ public class GameActivity extends ActionBarActivity {
         Intent intent = new Intent(this, ScoresActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        gameFragment.stopChronometer();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        gameFragment.restartChronometer();
+    }
 }
