@@ -17,6 +17,7 @@ import hu.ait.android.aloke.memorygame.MainActivity;
 import hu.ait.android.aloke.memorygame.R;
 import hu.ait.android.aloke.memorygame.ScoresActivity;
 import hu.ait.android.aloke.memorygame.SettingsActivity;
+import hu.ait.android.aloke.memorygame.TutorialActivity;
 
 /**
  * Created by Aloke on 4/6/15.
@@ -66,6 +67,14 @@ public class MainActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "© Aloke Desai, 2015",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        Button btnTutorial = (Button) rootView.findViewById(R.id.btnTutorial);
+        btnTutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), TutorialActivity.class));
             }
         });
 
