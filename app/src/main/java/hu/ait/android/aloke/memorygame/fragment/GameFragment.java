@@ -19,7 +19,6 @@ import hu.ait.android.aloke.memorygame.R;
 import hu.ait.android.aloke.memorygame.adapter.GameAdapter;
 
 
-
 /**
  * Created by Aloke on 4/6/15.
  */
@@ -28,6 +27,7 @@ public class GameFragment extends Fragment {
     private Chronometer chronometer;
     private GameAdapter adapter;
     private NumberProgressBar numberProgressBar;
+    private int numPieces;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class GameFragment extends Fragment {
         numberProgressBar = (NumberProgressBar) rootView.findViewById(R.id.numberProgressBar);
 
         Bundle bundle = getArguments();
-        int numPieces = bundle.getInt(GameActivity.BOARD_SIZE, GameActivity.EASY_GAME);
+        numPieces = bundle.getInt(GameActivity.BOARD_SIZE, GameActivity.EASY_GAME);
         setDifficulty(numPieces);
 
         adapter = new GameAdapter(getActivity(), numPieces, this);
@@ -56,7 +56,7 @@ public class GameFragment extends Fragment {
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter.resetGame();
+                resetGame();
             }
         });
 
@@ -83,7 +83,12 @@ public class GameFragment extends Fragment {
     }
 
     public void resetGame() {
-        adapter.resetGame();
+        // reset chronometer and progress bar
+        numberProgressBar.setProgress(0);
+        resetChronomter();
+
+        adapter = new GameAdapter(getActivity(), numPieces, this);
+        gridView.setAdapter(adapter);
     }
 
     public void startChronometer() {
