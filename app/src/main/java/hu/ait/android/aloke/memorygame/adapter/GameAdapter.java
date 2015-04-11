@@ -29,6 +29,8 @@ import it.sephiroth.android.library.viewrevealanimator.ViewRevealAnimator;
  * Created by Aloke on 4/6/15.
  */
 public class GameAdapter extends BaseAdapter {
+    private GameFragment fragment;
+
     private ArrayList<GameItem> images = new ArrayList<>();
     private Integer lastGuess;
 
@@ -37,8 +39,8 @@ public class GameAdapter extends BaseAdapter {
     // used for the pause delay
     private Handler handler = new Handler();
 
-   // boolean to toggle whether the user can click.
-   // the user cannot click during one second pause after an incorrect guess
+    // boolean to toggle whether the user can click.
+    // the user cannot click during one second pause after an incorrect guess
     private boolean canClick = true;
 
 
@@ -48,9 +50,11 @@ public class GameAdapter extends BaseAdapter {
 
     private Context ctx;
 
-    public GameAdapter(Context ctx, int numPieces) {
+    public GameAdapter(Context ctx, int numPieces, GameFragment fragment) {
         this.ctx = ctx;
         this.numPieces = numPieces;
+        this.fragment = fragment;
+
         numPiecesLeft = numPieces;
 
         GameItem.SquareType.values();
@@ -108,11 +112,10 @@ public class GameAdapter extends BaseAdapter {
                         if (lastGuess == null) {
                             // first guess
                             images.get(position).setChosen(true);
-                            System.out.println("marking " + position + " as chosen");
                             oldAnimator = animator;
 
                             animator.showNext();
-                            lastGuess =  position;
+                            lastGuess = position;
                         } else {
                             int currentValue = images.get(position).getSquareType().getValue();
                             int lastValue = images.get(lastGuess).getSquareType().getValue();
@@ -121,13 +124,15 @@ public class GameAdapter extends BaseAdapter {
                             images.get(position).setChosen(true);
 
                             if (currentValue != lastValue) {
-                                System.out.println("incorrect guess!");
                                 // incorrect guess
-                                // TODO: figure out how to access the old animator
                                 hideImagesAfterDelay(position, animator);
                             } else {
-                                System.out.println("correct guess");
+                                // correct guess
                                 numPiecesLeft--;
+
+                                // update the progress bar
+                                double progress = ((double) numPiecesLeft) / numPieces;
+                                fragment.updateProgressBar((int) ((1 - progress) * 100));
                                 checkForGameOver();
                             }
 
@@ -266,7 +271,7 @@ public class GameAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public static class ViewHolder{
+    public static class ViewHolder {
         ViewRevealAnimator animator;
         public ImageView ivActualImage;
         public ImageView ivMain;

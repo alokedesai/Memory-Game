@@ -11,6 +11,12 @@
         android:textSize="20sp"
         android:id="@+id/chronometer"/>
 
+    <com.daimajia.numberprogressbar.NumberProgressBar
+        android:id="@+id/numberProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/NumberProgressBar_Default"/>
+
     <GridView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

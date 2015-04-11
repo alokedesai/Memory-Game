@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.GridView;
 
+import com.daimajia.numberprogressbar.NumberProgressBar;
+
 import hu.ait.android.aloke.memorygame.GameActivity;
 import hu.ait.android.aloke.memorygame.R;
 import hu.ait.android.aloke.memorygame.adapter.GameAdapter;
@@ -25,6 +27,7 @@ public class GameFragment extends Fragment {
     private GridView gridView;
     private Chronometer chronometer;
     private GameAdapter adapter;
+    private NumberProgressBar numberProgressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,12 +36,13 @@ public class GameFragment extends Fragment {
         gridView = (GridView) rootView.findViewById(R.id.gridView);
         Button btnReset = (Button) rootView.findViewById(R.id.btnReset);
         chronometer = (Chronometer) rootView.findViewById(R.id.chronometer);
+        numberProgressBar = (NumberProgressBar) rootView.findViewById(R.id.numberProgressBar);
 
         Bundle bundle = getArguments();
         int numPieces = bundle.getInt(GameActivity.BOARD_SIZE, GameActivity.EASY_GAME);
         setDifficulty(numPieces);
 
-        adapter = new GameAdapter(getActivity(), numPieces);
+        adapter = new GameAdapter(getActivity(), numPieces, this);
         gridView.setAdapter(adapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -72,6 +76,10 @@ public class GameFragment extends Fragment {
                 gridView.setNumColumns(5);
                 break;
         }
+    }
+
+    public void updateProgressBar(int progress) {
+        numberProgressBar.setProgress(progress);
     }
 
     public void resetGame() {
