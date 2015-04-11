@@ -19,10 +19,18 @@ public class GameItem {
 //        RASPBERRY(13, R.drawable.raspberry), COCONUT(14, R.drawable.coconut),
 //        GRAPEFRUIT(15, R.drawable.grapefruit), PEAR(16, R.drawable.pear),
 //        PEACH(17, R.drawable.peach);
-        ACCOUNT(0, R.drawable.acccount), ACCESSIBILITY(1, R.drawable.accessibility),
-        ALARM(2, R.drawable.alarm), ALBUM(3, R.drawable.album), BRIGHTNESS(4, R.drawable.brightness),
-        BUS(5, R.drawable.bus), CAKE(6, R.drawable.cake), CAMERA(7, R.drawable.camera),
-        FLORIST(8, R.drawable.florist), HEADSET(9, R.drawable.headset);
+
+
+//        ACCOUNT(0, R.drawable.acccount), ACCESSIBILITY(1, R.drawable.accessibility),
+//        ALARM(2, R.drawable.alarm), ALBUM(3, R.drawable.album), BRIGHTNESS(4, R.drawable.brightness),
+//        BUS(5, R.drawable.bus), CAKE(6, R.drawable.cake), CAMERA(7, R.drawable.camera),
+//        FLORIST(8, R.drawable.florist), HEADSET(9, R.drawable.headset);
+
+        SUNSHINE(0, R.drawable.sunshine), COBALT(1, R.drawable.cobalt),
+        ORCHID(2, R.drawable.orchid), SANDSTONE(3, R.drawable.sandstone),
+        BLOOD_ORANGE(4, R.drawable.blood_orange), PEACH(5, R.drawable.peach),
+        CHIVE(6, R.drawable.chive), PERIWINKLE(7, R.drawable.periwinkle), TEAL(8, R.drawable.teal),
+        BRICK(9, R.drawable.brick);
 
         private int value;
         private int iconId;
@@ -39,7 +47,7 @@ public class GameItem {
                     return p;
                 }
             }
-            return ACCOUNT;
+            return TEAL;
         }
 
         public int getIconId() {
