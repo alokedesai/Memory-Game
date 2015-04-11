@@ -23,6 +23,7 @@ import hu.ait.android.aloke.memorygame.R;
 import hu.ait.android.aloke.memorygame.fragment.GameFragment;
 import hu.ait.android.aloke.memorygame.model.GameItem;
 import hu.ait.android.aloke.memorygame.model.Score;
+import it.sephiroth.android.library.viewrevealanimator.ViewRevealAnimator;
 
 /**
  * Created by Aloke on 4/6/15.
@@ -30,11 +31,21 @@ import hu.ait.android.aloke.memorygame.model.Score;
 public class GameAdapter extends BaseAdapter {
     private ArrayList<GameItem> images = new ArrayList<>();
     private Integer lastGuess;
+
+    private ViewRevealAnimator oldAnimator;
+
+    // used for the pause delay
     private Handler handler = new Handler();
+
+   // boolean to toggle whether the user can click.
+   // the user cannot click during one second pause after an incorrect guess
     private boolean canClick = true;
+
+
     private int numPiecesLeft;
     private int numPieces;
     private boolean gameStarted = false;
+
     private Context ctx;
 
     public GameAdapter(Context ctx, int numPieces) {
@@ -69,15 +80,62 @@ public class GameAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if (v == null) {
             v = LayoutInflater.from(ctx).inflate(R.layout.grid_cell_layout, null);
             ImageView ivMain = (ImageView) v.findViewById(R.id.ivMain);
+            ImageView ivActualImage = (ImageView) v.findViewById(R.id.ivActualImage);
+            final ViewRevealAnimator animator = (ViewRevealAnimator) v.findViewById(R.id.animator);
 
             //set View holder
             ViewHolder holder = new ViewHolder();
             holder.ivMain = ivMain;
+            holder.ivActualImage = ivActualImage;
+            holder.animator = animator;
+
+            animator.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!gameStarted) {
+                        gameStarted = true;
+                        ((GameActivity) ctx).startChronometer();
+                    }
+
+                    System.out.println("is chosen: " + images.get(position).isChosen());
+
+                    if (canClick && !images.get(position).isChosen()) {
+                        if (lastGuess == null) {
+                            // first guess
+                            images.get(position).setChosen(true);
+                            System.out.println("marking " + position + " as chosen");
+                            oldAnimator = animator;
+
+                            animator.showNext();
+                            lastGuess =  position;
+                        } else {
+                            int currentValue = images.get(position).getSquareType().getValue();
+                            int lastValue = images.get(lastGuess).getSquareType().getValue();
+
+                            animator.showNext();
+                            images.get(position).setChosen(true);
+
+                            if (currentValue != lastValue) {
+                                System.out.println("incorrect guess!");
+                                // incorrect guess
+                                // TODO: figure out how to access the old animator
+                                hideImagesAfterDelay(position, animator);
+                            } else {
+                                System.out.println("correct guess");
+                                numPiecesLeft--;
+                                checkForGameOver();
+                            }
+
+                            lastGuess = null;
+                        }
+                    }
+                }
+            });
             v.setTag(holder);
         }
 
@@ -85,7 +143,7 @@ public class GameAdapter extends BaseAdapter {
 
         if (currentItem != null) {
             ViewHolder holder = (ViewHolder) v.getTag();
-            holder.ivMain.setImageResource(images.get(position).getImageResource());
+            holder.ivActualImage.setImageResource(images.get(position).getImageResource());
         }
 
         return v;
@@ -93,36 +151,36 @@ public class GameAdapter extends BaseAdapter {
 
     //TODO: clean up this method, extract into other methods
     public void setChosen(final int position, boolean chosen) {
-        // start clock if this is the first time clicking the board
-        if (!gameStarted) {
-            gameStarted = true;
-            ((GameActivity) ctx).startChronometer();
-        }
-        if (canClick && !images.get(position).isChosen()) {
-            if (lastGuess == null) {
-                // first guess
-                images.get(position).setChosen(chosen);
-                lastGuess = position;
-            } else {
-
-                // only mark them as chosen if they were the same
-                // otherwise mark both of them as chosen: false
-                int currentValue = images.get(position).getSquareType().getValue();
-                int lastValue = images.get(lastGuess).getSquareType().getValue();
-
-                images.get(position).setChosen(true);
-
-                if (currentValue != lastValue) {
-                    hideImagesAfterDelay(position);
-                } else {
-                    // correct guess
-                    numPiecesLeft--;
-                    checkForGameOver();
-                }
-
-                lastGuess = null;
-            }
-        }
+//        // start clock if this is the first time clicking the board
+//        if (!gameStarted) {
+//            gameStarted = true;
+//            ((GameActivity) ctx).startChronometer();
+//        }
+//        if (canClick && !images.get(position).isChosen()) {
+//            if (lastGuess == null) {
+//                // first guess
+//                images.get(position).setChosen(chosen);
+//                lastGuess = position;
+//            } else {
+//
+//                // only mark them as chosen if they were the same
+//                // otherwise mark both of them as chosen: false
+//                int currentValue = images.get(position).getSquareType().getValue();
+//                int lastValue = images.get(lastGuess).getSquareType().getValue();
+//
+//                images.get(position).setChosen(true);
+//
+//                if (currentValue != lastValue) {
+//                    hideImagesAfterDelay(position);
+//                } else {
+//                    // correct guess
+//                    numPiecesLeft--;
+//                    checkForGameOver();
+//                }
+//
+//                lastGuess = null;
+//            }
+//        }
     }
 
     private void checkForGameOver() {
@@ -168,7 +226,7 @@ public class GameAdapter extends BaseAdapter {
         return sdfDate.format(now);
     }
 
-    private void hideImagesAfterDelay(final int position) {
+    private void hideImagesAfterDelay(final int position, final ViewRevealAnimator currentAnimator) {
         final int tempGuess = lastGuess;
         canClick = false;
 
@@ -178,8 +236,12 @@ public class GameAdapter extends BaseAdapter {
                 // incorrect guess
                 images.get(tempGuess).setChosen(false);
                 images.get(position).setChosen(false);
-                notifyDataSetChanged();
 
+                // make animation back to question marks
+                currentAnimator.showPrevious();
+                oldAnimator.showPrevious();
+
+                notifyDataSetChanged();
                 canClick = true;
             }
         }, 1000);
@@ -205,6 +267,8 @@ public class GameAdapter extends BaseAdapter {
     }
 
     public static class ViewHolder{
+        ViewRevealAnimator animator;
+        public ImageView ivActualImage;
         public ImageView ivMain;
     }
 

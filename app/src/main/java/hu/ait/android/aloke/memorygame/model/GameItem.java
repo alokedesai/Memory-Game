@@ -77,6 +77,7 @@ public class GameItem {
     }
 
     public int getImageResource() {
-        return (chosen ? squareType.getIconId() : R.drawable.new_question_mark);
+//        return (chosen ? squareType.getIconId() : R.drawable.new_question_mark);
+        return squareType.getIconId();
     }
 }
