@@ -45,14 +45,6 @@ public class GameFragment extends Fragment {
         adapter = new GameAdapter(getActivity(), numPieces, this);
         gridView.setAdapter(adapter);
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                adapter.setChosen(position, true);
-                adapter.notifyDataSetChanged();
-            }
-        });
-
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +77,7 @@ public class GameFragment extends Fragment {
     public void resetGame() {
         // reset chronometer and progress bar
         numberProgressBar.setProgress(0);
-        resetChronomter();
+        resetChronometer();
 
         adapter = new GameAdapter(getActivity(), numPieces, this);
         gridView.setAdapter(adapter);
@@ -101,7 +93,7 @@ public class GameFragment extends Fragment {
         return chronometer.getText().toString();
     }
 
-    public void resetChronomter() {
+    public void resetChronometer() {
         chronometer.stop();
 
         // reset base here just to clear the chronometer
@@ -110,9 +102,5 @@ public class GameFragment extends Fragment {
 
     public long getChronometerBase() {
         return chronometer.getBase();
-    }
-
-    public void restartChronometer() {
-        chronometer.start();
     }
 }

@@ -1,14 +1,28 @@
-<android.support.v4.view.ViewPager
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pager"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context=".MainActivity">
 
-    <android.support.v4.view.PagerTabStrip
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        />
 
-</android.support.v4.view.ViewPager>
+
+    <github.chenupt.springindicator.SpringIndicator xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                    app:siTextSize="18sp"
+                                                    app:siRadiusMax="40dp"
+                                                    app:siIndicatorColors="@array/indicator_colors"
+                                                    app:siTextColor="@color/colorPrimaryDark"
+                                                    app:siSelectedTextColor="@android:color/white"
+                                                    app:siIndicatorColor="@color/colorPrimary"
+                                                    android:id="@+id/indicator"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="56dp" />
+
+    <github.chenupt.springindicator.viewpager.ScrollerViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
+
+</LinearLayout>

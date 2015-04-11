@@ -18,6 +18,7 @@ public class GameActivity extends ActionBarActivity {
     public static final int HARD_GAME = 10;
 
     private GameFragment gameFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,23 +29,6 @@ public class GameActivity extends ActionBarActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragmentContainer, gameFragment).commit();
-    }
-
-    //TODO: is there a better way of doing this?
-    public void startChronometer() {
-        gameFragment.startChronometer();
-    }
-
-    public String stopChronometer() {
-        return gameFragment.stopChronometer();
-    }
-
-    public void resetChronometer() {
-        gameFragment.resetChronomter();
-    }
-
-    public long getChronometerBase() {
-        return gameFragment.getChronometerBase();
     }
 
     public void launchGameOverDialog(String time) {
@@ -86,17 +70,5 @@ public class GameActivity extends ActionBarActivity {
     public void startScoresActivity() {
         Intent intent = new Intent(this, ScoresActivity.class);
         startActivity(intent);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        gameFragment.stopChronometer();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        gameFragment.restartChronometer();
     }
 }

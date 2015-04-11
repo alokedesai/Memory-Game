@@ -22,14 +22,6 @@ import hu.ait.android.aloke.memorygame.model.Score;
  */
 public class ScoreAdapter extends BaseAdapter {
     private final Context ctx;
-
-    //--------------------------------------------
-    //TODO: remove this
-    SimpleDateFormat sdfDate = new SimpleDateFormat("MM/dd/yyyy 'at' hh:mm a");
-    Date now = new Date();
-    String strDate = sdfDate.format(now);
-    //--------------------------------------------
-
     private List<Score> scores;
 
     public ScoreAdapter(Context ctx, List<Score> scores) {

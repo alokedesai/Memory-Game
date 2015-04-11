@@ -17,21 +17,24 @@
     <string name="name_edit_text_hint">Name</string>
     <string name="age_edit_text_hint">Age</string>
     <string name="save_button_text">Save</string>
-    <string name="title_activity_game">GameActivity</string>
+    <string name="title_activity_game">Memory Game</string>
     <string name="reset_button_text">Reset</string>
     <string name="click_to_start_text_view_title">Click to Start</string>
     <string name="you_won_game_over_fragment">You Won!</string>
     <string name="your_time_game_over_dialog">Your time was: %1$s</string>
-    <string name="title_activity_scores">ScoresActivity</string>
+    <string name="title_activity_scores">High Scores</string>
     <string name="no_high_score">No high scores</string>
     <string name="restart_dialog_label">Restart</string>
     <string name="main_menu_dialog">Main Menu</string>
     <string name="high_scores_dialog_label">High Scores</string>
     <string name="welcome_message_settings">Welcome to the Memory Game! Please fill out the settings before playing.</string>
-    <string name="title_activity_tutorial">TutorialActivity</string>
+    <string name="title_activity_tutorial">Tutorial</string>
     <string name="levels_instruction_text_view">To begin, click New Game and choose your level. You can choose from Beginner, Intermediate, and Hard.
         The harder the level, the more squares the game board has.</string>
     <string name="gameplay_tutorial_text">To play, you must identify the two pictures that match. If you pick two images that match, the images will stay on the board. However, if the two images don\'t match, the images will be hidden again. To win, you must have all the images be facing up.</string>
     <string name="high_scores_tutorial_text">Once you\'ve played, you can view your personal high scores in the High Scores tab.</string>
+    <string name="easy_text_score_view_pager">Easy</string>
+    <string name="medium_text_score_view_pager">Medium</string>
+    <string name="hard_text_score_view_pager">Hard</string>
 
 </resources>

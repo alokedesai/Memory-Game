@@ -103,10 +103,8 @@ public class GameAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     if (!gameStarted) {
                         gameStarted = true;
-                        ((GameActivity) ctx).startChronometer();
+                        fragment.startChronometer();
                     }
-
-                    System.out.println("is chosen: " + images.get(position).isChosen());
 
                     if (canClick && !images.get(position).isChosen()) {
                         if (lastGuess == null) {
@@ -154,45 +152,9 @@ public class GameAdapter extends BaseAdapter {
         return v;
     }
 
-    //TODO: clean up this method, extract into other methods
-    public void setChosen(final int position, boolean chosen) {
-//        // start clock if this is the first time clicking the board
-//        if (!gameStarted) {
-//            gameStarted = true;
-//            ((GameActivity) ctx).startChronometer();
-//        }
-//        if (canClick && !images.get(position).isChosen()) {
-//            if (lastGuess == null) {
-//                // first guess
-//                images.get(position).setChosen(chosen);
-//                lastGuess = position;
-//            } else {
-//
-//                // only mark them as chosen if they were the same
-//                // otherwise mark both of them as chosen: false
-//                int currentValue = images.get(position).getSquareType().getValue();
-//                int lastValue = images.get(lastGuess).getSquareType().getValue();
-//
-//                images.get(position).setChosen(true);
-//
-//                if (currentValue != lastValue) {
-//                    hideImagesAfterDelay(position);
-//                } else {
-//                    // correct guess
-//                    numPiecesLeft--;
-//                    checkForGameOver();
-//                }
-//
-//                lastGuess = null;
-//            }
-//        }
-    }
-
     private void checkForGameOver() {
-        System.out.println("num pieces left " + numPiecesLeft);
         if (numPiecesLeft == 0) {
-            gameStarted = false;
-            String result = ((GameActivity) ctx).stopChronometer();
+            String result = fragment.stopChronometer();
 
             // create a new score
             createScore(result);
@@ -202,7 +164,7 @@ public class GameAdapter extends BaseAdapter {
     }
 
     private void createScore(String readableTime) {
-        long ellapsedTime = SystemClock.elapsedRealtime() - ((GameActivity) ctx).getChronometerBase();
+        long ellapsedTime = SystemClock.elapsedRealtime() - fragment.getChronometerBase();
         String date = getDateAsString();
 
         // get difficulty
@@ -250,25 +212,6 @@ public class GameAdapter extends BaseAdapter {
                 canClick = true;
             }
         }, 1000);
-    }
-
-    public void resetGame() {
-        // reset variables
-        numPiecesLeft = numPieces;
-        lastGuess = null;
-        gameStarted = false;
-
-        //reset chronometer
-        ((GameActivity) ctx).resetChronometer();
-
-        // mark all the images as not chosen
-        for (GameItem item : images) {
-            item.setChosen(false);
-        }
-
-        // reshuffle the items
-        Collections.shuffle(images);
-        notifyDataSetChanged();
     }
 
     public static class ViewHolder {

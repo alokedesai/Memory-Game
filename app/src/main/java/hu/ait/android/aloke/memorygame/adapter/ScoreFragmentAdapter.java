@@ -1,11 +1,13 @@
 package hu.ait.android.aloke.memorygame.adapter;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import hu.ait.android.aloke.memorygame.GameActivity;
+import hu.ait.android.aloke.memorygame.R;
 import hu.ait.android.aloke.memorygame.fragment.GameFragment;
 import hu.ait.android.aloke.memorygame.fragment.ScoreFragment;
 import hu.ait.android.aloke.memorygame.model.Score;
@@ -14,9 +16,11 @@ import hu.ait.android.aloke.memorygame.model.Score;
  * Created by Aloke on 4/9/15.
  */
 public class ScoreFragmentAdapter extends FragmentPagerAdapter {
+    private Context ctx;
 
-    public ScoreFragmentAdapter(FragmentManager fm) {
+    public ScoreFragmentAdapter(FragmentManager fm, Context ctx) {
         super(fm);
+        this.ctx = ctx;
     }
 
     @Override
@@ -49,14 +53,13 @@ public class ScoreFragmentAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                //TODO: how do I extract string resource here?
-                return "Easy";
+                return ctx.getString(R.string.easy_text_score_view_pager);
             case 1:
-                return "Medium";
+                return ctx.getString(R.string.medium_text_score_view_pager);
             case 2:
-                return "Hard";
+                return ctx.getString(R.string.hard_text_score_view_pager);
             default:
-                return "Easy";
+                return ctx.getString(R.string.easy_text_score_view_pager);
         }
     }
 }

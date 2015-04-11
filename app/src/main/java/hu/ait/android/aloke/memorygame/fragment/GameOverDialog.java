@@ -37,7 +37,6 @@ public class GameOverDialog extends DialogFragment {
         builder.setNegativeButton(getString(R.string.main_menu_dialog), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //TODO: is there any problem with this?
                 (getActivity()).finish();
             }
         });

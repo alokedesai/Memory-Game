@@ -30,17 +30,18 @@ public class MainActivity extends ActionBarActivity implements DifficultyDialog.
         if (isFirstTimeUser()) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivityForResult(intent, RESULT_SETTINGS);
-        } else {
-            setContentView(R.layout.activity_main);
 
-            mainActivityFragment = new MainActivityFragment();
-            Bundle args = new Bundle();
-            args.putString(SettingsActivity.SETTINGS_NAME, getName());
-            mainActivityFragment.setArguments(args);
-
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.mainActivityFrame, mainActivityFragment).commit();
         }
+
+        setContentView(R.layout.activity_main);
+
+        mainActivityFragment = new MainActivityFragment();
+        Bundle args = new Bundle();
+        args.putString(SettingsActivity.SETTINGS_NAME, getName());
+        mainActivityFragment.setArguments(args);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainActivityFrame, mainActivityFragment).commit();
     }
 
     private boolean isFirstTimeUser() {
