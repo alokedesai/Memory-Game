@@ -101,7 +101,7 @@ public class MainActivityFragment extends Fragment {
 
 
     public void setName(String name) {
-        if (!"".equals(name)) {
+        if (name != null) {
             tvWelcome.setText(getString(R.string.welcome_text, ", " + name));
         } else {
             tvWelcome.setText(getString(R.string.welcome_text, ""));
