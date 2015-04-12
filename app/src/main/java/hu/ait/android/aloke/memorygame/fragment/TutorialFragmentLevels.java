@@ -15,6 +15,6 @@ import hu.ait.android.aloke.memorygame.R;
 public class TutorialFragmentLevels extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_tutorial_one, container, false);
+        return inflater.inflate(R.layout.fragment_tutorial_levels, container, false);
     }
 }

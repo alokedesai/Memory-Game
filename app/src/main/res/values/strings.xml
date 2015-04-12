@@ -44,5 +44,8 @@
     <string name="you_must_enter_a_name_error_text">You must enter a name</string>
     <string name="you_must_enter_an_age_error_text">You must enter an age</string>
     <string name="first_time_update_settings_dialog_message">It looks like this is your first time playing Memory Game! Would you like to update your settings?</string>
+    <string name="game_play_title_text">Game Play</string>
+    <string name="high_scores_title">High Scores</string>
+    <string name="levels_title_text">Levels</string>
 
 </resources>

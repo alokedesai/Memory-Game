@@ -48,13 +48,13 @@ public class TutorialFragmentAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return context.getString(R.string.levels_title_tutorial_view_pager);
+                return "1";
             case 1:
-                return context.getString(R.string.gameplay_title_tutorial_view_pager);
+                return "2";
             case 2:
-                return context.getString(R.string.highscore_title_tutorial_view_pager);
+                return "3";
             default:
-                return context.getString(R.string.levels_title_tutorial_view_pager);
+                return "";
         }
     }
 }
