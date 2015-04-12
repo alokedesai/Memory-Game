@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:title="Your Name"
+        android:key="SETTINGS_NAME"
+        android:summary="Please provide your name" />
+
+    <EditTextPreference
+        android:title="Your Age"
+        android:key="SETTINGS_AGE"
+        android:inputType="number"
+        android:summary="Please provide your age" />
+
+    <ListPreference     android:title="Gender"
+                        android:summary="Select your gender"
+                        android:key="SETTINGS_GENDER"
+                        android:defaultValue="1"
+                        android:entries="@array/gender_array"
+                        android:entryValues="@array/gender_array" />
+
+</PreferenceScreen>

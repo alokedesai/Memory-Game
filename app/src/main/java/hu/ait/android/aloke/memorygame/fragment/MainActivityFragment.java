@@ -33,9 +33,6 @@ public class MainActivityFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_activity_main, container, false);
         tvWelcome = (TextView) rootView.findViewById(R.id.tvWelcome);
 
-        // set the name for the textview based on shared preferences
-        setName();
-
         Button btnSettings = (Button) rootView.findViewById(R.id.btnSettings);
         setBtnSettingsOnClickListener(btnSettings);
 
@@ -102,12 +99,12 @@ public class MainActivityFragment extends Fragment {
         });
     }
 
-    private void setName() {
-        String name = getArguments().getString(SettingsActivity.SETTINGS_NAME, "");
-        tvWelcome.setText(getString(R.string.welcome_text, name));
-    }
 
     public void setName(String name) {
-        tvWelcome.setText(getString(R.string.welcome_text, name));
+        if (!"".equals(name)) {
+            tvWelcome.setText(getString(R.string.welcome_text, ", " + name));
+        } else {
+            tvWelcome.setText(getString(R.string.welcome_text, ""));
+        }
     }
 }

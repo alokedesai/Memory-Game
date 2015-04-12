@@ -8,41 +8,47 @@
               android:paddingBottom="@dimen/activity_vertical_margin"
               android:orientation="vertical"
               tools:context="hu.ait.android.aloke.memorygame.SettingsActivity">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:visibility="gone"
-        android:id="@+id/tvWelcomeMessageSettings"
-        android:text="@string/welcome_message_settings"/>
 
-    <EditText
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/name_edit_text_hint"
-        android:id="@+id/etName"/>
+        android:layout_height="match_parent"
+        android:id="@+id/layoutSettings"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="@string/age_edit_text_hint"
-        android:id="@+id/etAge"/>
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:gravity="center"-->
+    <!--android:visibility="gone"-->
+    <!--android:id="@+id/tvWelcomeMessageSettings"-->
+    <!--android:text="@string/welcome_message_settings"/>-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/gender_textview_title"/>
+    <!--<EditText-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:hint="@string/name_edit_text_hint"-->
+    <!--android:id="@+id/etName"/>-->
 
-    <Spinner
-        android:id="@+id/spnGender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <!--<EditText-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:inputType="number"-->
+    <!--android:hint="@string/age_edit_text_hint"-->
+    <!--android:id="@+id/etAge"/>-->
 
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/save_button_text"/>
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/gender_textview_title"/>-->
+
+    <!--<Spinner-->
+    <!--android:id="@+id/spnGender"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/btnSave"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/save_button_text"/>-->
 
 </LinearLayout>

@@ -3,6 +3,7 @@ package hu.ait.android.aloke.memorygame;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.audiofx.BassBoost;
+import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -30,12 +31,17 @@ public class MainActivity extends ActionBarActivity implements DifficultyDialog.
         if (isFirstTimeUser()) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivityForResult(intent, RESULT_SETTINGS);
-
         }
         setContentView(R.layout.activity_main);
 
         // start the main activity fragment
         startMainActivityFragment();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mainActivityFragment.setName(getName());
     }
 
     private void startMainActivityFragment() {
@@ -53,17 +59,8 @@ public class MainActivity extends ActionBarActivity implements DifficultyDialog.
     }
 
     private String getName() {
-        SharedPreferences sp = getSharedPreferences(SettingsActivity.SETTINGS_PREF, MODE_PRIVATE);
-        String name = sp.getString(SettingsActivity.SETTINGS_NAME, null);
-        return name;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //reupdate the text for the welcome message if the settings was updated
-        if (requestCode == RESULT_SETTINGS && resultCode == RESULT_OK) {
-            mainActivityFragment.setName(getName());
-        }
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        return sp.getString(SettingsActivity.SETTINGS_NAME, null);
     }
 
     @Override
