@@ -32,6 +32,7 @@ public class SettingsActivity extends ActionBarActivity {
 
         SharedPreferences sp = getSharedPreferences(SETTINGS_PREF, MODE_PRIVATE);
         String name = sp.getString(SETTINGS_NAME, null);
+
         if (name != null) {
             // set the form to its old views
             setTextViews(etName, etAge);
@@ -40,13 +41,18 @@ public class SettingsActivity extends ActionBarActivity {
         }
 
         Button btnSave = (Button) findViewById(R.id.btnSave);
+        setBtnSaveOnClickListener(spinner, etName, etAge, btnSave);
+
+    }
+
+    private void setBtnSaveOnClickListener(final Spinner spinner, final EditText etName, final EditText etAge, Button btnSave) {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if ("".equals(etName.getText().toString())) {
-                    etName.setError("You must enter a name");
+                    etName.setError(getString(R.string.you_must_enter_a_name_error_text));
                 } else if ("".equals(etAge.getText().toString())) {
-                    etAge.setError("You must enter an age");
+                    etAge.setError(getString(R.string.you_must_enter_an_age_error_text));
                 } else {
                     // save to shared preferences
                     saveSettings(etName, spinner, etAge);
@@ -56,7 +62,6 @@ public class SettingsActivity extends ActionBarActivity {
                 }
             }
         });
-
     }
 
     private void setTextViews(EditText etName, EditText etAge) {
@@ -90,28 +95,5 @@ public class SettingsActivity extends ActionBarActivity {
         editor.putString(SETTINGS_AGE, etAge.getText().toString());
 
         editor.apply();
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_settings, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

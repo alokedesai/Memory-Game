@@ -36,5 +36,12 @@
     <string name="easy_text_score_view_pager">Easy</string>
     <string name="medium_text_score_view_pager">Medium</string>
     <string name="hard_text_score_view_pager">Hard</string>
+    <string name="levels_title_tutorial_view_pager">Levels</string>
+    <string name="gameplay_title_tutorial_view_pager">Gameplay</string>
+    <string name="highscore_title_tutorial_view_pager">Highscore</string>
+    <string name="cancel_button_text_difficulty_dialog">Cancel</string>
+    <string name="choose_dificulty_text_difficulty_dialog">Choose Difficulty</string>
+    <string name="you_must_enter_a_name_error_text">You must enter a name</string>
+    <string name="you_must_enter_an_age_error_text">You must enter an age</string>
 
 </resources>

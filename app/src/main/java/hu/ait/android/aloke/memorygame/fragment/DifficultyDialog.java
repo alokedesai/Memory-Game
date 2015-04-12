@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import hu.ait.android.aloke.memorygame.GameActivity;
+import hu.ait.android.aloke.memorygame.R;
 
 /**
  * Created by Aloke on 4/6/15.
@@ -21,7 +22,8 @@ public class DifficultyDialog extends DialogFragment implements DialogInterface.
     public static final String TAG = "DifficultyDialog";
 
     private static String[] levels = {"Easy", "Medium", "Hard"};
-    //
+
+    //the corresponding game board sizes to the levels
     private static int[] levelSizes = {GameActivity.EASY_GAME, GameActivity.MEDIUM_GAME, GameActivity.HARD_GAME};
 
     public interface DifficultyDialogFragmentInterface {
@@ -37,8 +39,8 @@ public class DifficultyDialog extends DialogFragment implements DialogInterface.
 
         builder.setItems(levels, this);
 
-        builder.setNegativeButton("Cancel", null);
-        builder.setTitle("Choose Difficulty");
+        builder.setNegativeButton(getActivity().getString(R.string.cancel_button_text_difficulty_dialog), null);
+        builder.setTitle(getActivity().getString(R.string.choose_dificulty_text_difficulty_dialog));
 
         return builder.create();
     }
@@ -48,6 +50,8 @@ public class DifficultyDialog extends DialogFragment implements DialogInterface.
         difficultyDialogFragmentInterface.onDifficultyDialogFragmentResult(levels[which], levelSizes[which]);
     }
 
+
+    // on Attach override to instruct developer that he/she must implement this method
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

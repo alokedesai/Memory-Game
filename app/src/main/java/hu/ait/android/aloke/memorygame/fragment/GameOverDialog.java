@@ -27,6 +27,7 @@ public class GameOverDialog extends DialogFragment {
         builder.setTitle(getString(R.string.you_won_game_over_fragment));
         builder.setMessage(getString(R.string.your_time_game_over_dialog, time));
 
+        // set the three buttons for the dialog
         builder.setPositiveButton(getString(R.string.restart_dialog_label), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

@@ -32,9 +32,13 @@ public class MainActivity extends ActionBarActivity implements DifficultyDialog.
             startActivityForResult(intent, RESULT_SETTINGS);
 
         }
-
         setContentView(R.layout.activity_main);
 
+        // start the main activity fragment
+        startMainActivityFragment();
+    }
+
+    private void startMainActivityFragment() {
         mainActivityFragment = new MainActivityFragment();
         Bundle args = new Bundle();
         args.putString(SettingsActivity.SETTINGS_NAME, getName());
@@ -51,7 +55,6 @@ public class MainActivity extends ActionBarActivity implements DifficultyDialog.
     private String getName() {
         SharedPreferences sp = getSharedPreferences(SettingsActivity.SETTINGS_PREF, MODE_PRIVATE);
         String name = sp.getString(SettingsActivity.SETTINGS_NAME, null);
-        System.out.println("the current name is " + name);
         return name;
     }
 
@@ -64,30 +67,8 @@ public class MainActivity extends ActionBarActivity implements DifficultyDialog.
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onDifficultyDialogFragmentResult(String item, int numPieces) {
-        // ignore the dificulty for now
+        // get the difficulty and start the game activity
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(GameActivity.BOARD_SIZE, numPieces);
         startActivity(intent);

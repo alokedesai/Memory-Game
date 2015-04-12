@@ -17,5 +17,4 @@ public class TutorialFragmentLevels extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_tutorial_one, container, false);
     }
-
 }

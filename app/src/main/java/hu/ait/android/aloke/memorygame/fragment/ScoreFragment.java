@@ -18,6 +18,7 @@ import hu.ait.android.aloke.memorygame.model.Score;
  */
 public class ScoreFragment extends android.support.v4.app.ListFragment {
     public static final String SEARCH_QUERY = "SEARCH_QUERY";
+    private static final String NUM_SCORES = "10";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -25,8 +26,9 @@ public class ScoreFragment extends android.support.v4.app.ListFragment {
 
         String searchQuery = getArguments().getString(SEARCH_QUERY, Score.Difficulty.EASY.toString());
 
-        // get all the current scores
-        List<Score> scores = Score.find(Score.class, "difficulty = ?", new String[]{searchQuery},null, "num_milis ASC", "5");
+        // get all the current scores based on a sugar orm query
+        List<Score> scores = Score.find(Score.class, "difficulty = ?", new String[]{searchQuery},
+                null, "num_milis ASC", NUM_SCORES);
         setListAdapter(new ScoreAdapter(getActivity(), scores));
 
         return view;

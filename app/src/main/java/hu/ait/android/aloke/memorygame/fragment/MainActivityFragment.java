@@ -32,28 +32,47 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_activity_main, container, false);
         tvWelcome = (TextView) rootView.findViewById(R.id.tvWelcome);
-        // set the name for the textview
+
+        // set the name for the textview based on shared preferences
         setName();
 
         Button btnSettings = (Button) rootView.findViewById(R.id.btnSettings);
-        btnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                getActivity().startActivityForResult(intent, MainActivity.RESULT_SETTINGS);
-            }
-        });
+        setBtnSettingsOnClickListener(btnSettings);
 
         Button btnNewGame = (Button) rootView.findViewById(R.id.btnNewGame);
-        btnNewGame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DifficultyDialog difficultyDialog = new DifficultyDialog();
-                difficultyDialog.show(getActivity().getSupportFragmentManager(), DifficultyDialog.TAG);
-            }
-        });
+        setBtnNewGameOnClickListener(btnNewGame);
 
         Button btnScores = (Button) rootView.findViewById(R.id.btnScores);
+        setBtnScoresOnClickListener(btnScores);
+
+        Button btnAbout = (Button) rootView.findViewById(R.id.btnAbout);
+        setBtnAboutOnClickListener(btnAbout);
+
+        Button btnTutorial = (Button) rootView.findViewById(R.id.btnTutorial);
+        setBtnTutorialOnClickListener(btnTutorial);
+
+        return rootView;
+    }
+
+    private void setBtnTutorialOnClickListener(Button btnTutorial) {
+        btnTutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), TutorialActivity.class));
+            }
+        });
+    }
+
+    private void setBtnAboutOnClickListener(Button btnAbout) {
+        btnAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "© Aloke Desai, 2015", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void setBtnScoresOnClickListener(Button btnScores) {
         btnScores.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,24 +80,26 @@ public class MainActivityFragment extends Fragment {
                 startActivity(intent);
             }
         });
+    }
 
-        Button btnAbout = (Button) rootView.findViewById(R.id.btnAbout);
-        btnAbout.setOnClickListener(new View.OnClickListener() {
+    private void setBtnNewGameOnClickListener(Button btnNewGame) {
+        btnNewGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "© Aloke Desai, 2015",Toast.LENGTH_LONG).show();
+                DifficultyDialog difficultyDialog = new DifficultyDialog();
+                difficultyDialog.show(getActivity().getSupportFragmentManager(), DifficultyDialog.TAG);
             }
         });
+    }
 
-        Button btnTutorial = (Button) rootView.findViewById(R.id.btnTutorial);
-        btnTutorial.setOnClickListener(new View.OnClickListener() {
+    private void setBtnSettingsOnClickListener(Button btnSettings) {
+        btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), TutorialActivity.class));
+                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                getActivity().startActivityForResult(intent, MainActivity.RESULT_SETTINGS);
             }
         });
-
-        return rootView;
     }
 
     private void setName() {

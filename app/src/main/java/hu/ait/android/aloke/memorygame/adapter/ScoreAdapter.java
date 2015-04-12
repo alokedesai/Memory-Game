@@ -22,6 +22,8 @@ import hu.ait.android.aloke.memorygame.model.Score;
  */
 public class ScoreAdapter extends BaseAdapter {
     private final Context ctx;
+
+    // The initial list of scores based on a Sugar ORM query
     private List<Score> scores;
 
     public ScoreAdapter(Context ctx, List<Score> scores) {
@@ -68,11 +70,6 @@ public class ScoreAdapter extends BaseAdapter {
         }
 
         return v;
-    }
-
-    public void addItem(Score score) {
-        scores.add(score);
-        notifyDataSetChanged();
     }
 
     static class ViewHolder {

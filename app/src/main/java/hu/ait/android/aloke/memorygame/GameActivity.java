@@ -13,6 +13,7 @@ import hu.ait.android.aloke.memorygame.fragment.GameOverDialog;
 public class GameActivity extends ActionBarActivity {
     public static String BOARD_SIZE = "BOARD_SIZE";
 
+    // the number of pairs a game requires
     public static final int EASY_GAME = 3;
     public static final int MEDIUM_GAME = 8;
     public static final int HARD_GAME = 10;
@@ -43,28 +44,6 @@ public class GameActivity extends ActionBarActivity {
 
     public void resetGame() {
         gameFragment.resetGame();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_game, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public void startScoresActivity() {

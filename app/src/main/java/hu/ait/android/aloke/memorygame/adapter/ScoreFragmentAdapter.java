@@ -32,6 +32,9 @@ public class ScoreFragmentAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         ScoreFragment fragment = new ScoreFragment();
         Bundle args = new Bundle();
+
+        // regardless of the tab the user is on, the same fragment is used. The
+        // only thing that is toggled is the search query (based on Score Difficulty)
         switch (position) {
             case 0:
                 args.putString(ScoreFragment.SEARCH_QUERY, Score.Difficulty.EASY.toString());
@@ -45,6 +48,7 @@ public class ScoreFragmentAdapter extends FragmentPagerAdapter {
             default:
                 args.putString(ScoreFragment.SEARCH_QUERY, Score.Difficulty.EASY.toString());
         }
+
         fragment.setArguments(args);
         return fragment;
     }

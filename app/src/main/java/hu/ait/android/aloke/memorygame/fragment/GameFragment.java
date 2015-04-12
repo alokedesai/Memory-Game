@@ -23,10 +23,15 @@ import hu.ait.android.aloke.memorygame.adapter.GameAdapter;
  * Created by Aloke on 4/6/15.
  */
 public class GameFragment extends Fragment {
+
+    // the three critical views for the game
     private GridView gridView;
     private Chronometer chronometer;
-    private GameAdapter adapter;
     private NumberProgressBar numberProgressBar;
+
+    private GameAdapter adapter;
+
+    // the number of pieces for the game (this is dependent on the difficulty)
     private int numPieces;
 
     @Override
@@ -38,10 +43,12 @@ public class GameFragment extends Fragment {
         chronometer = (Chronometer) rootView.findViewById(R.id.chronometer);
         numberProgressBar = (NumberProgressBar) rootView.findViewById(R.id.numberProgressBar);
 
+
         Bundle bundle = getArguments();
         numPieces = bundle.getInt(GameActivity.BOARD_SIZE, GameActivity.EASY_GAME);
         setDifficulty(numPieces);
 
+        // initialize and set adapter
         adapter = new GameAdapter(getActivity(), numPieces, this);
         gridView.setAdapter(adapter);
 

@@ -1,9 +1,11 @@
 package hu.ait.android.aloke.memorygame.adapter;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import hu.ait.android.aloke.memorygame.R;
 import hu.ait.android.aloke.memorygame.fragment.TutorialFragmentGamePlay;
 import hu.ait.android.aloke.memorygame.fragment.TutorialFragmentHighScore;
 import hu.ait.android.aloke.memorygame.fragment.TutorialFragmentLevels;
@@ -12,9 +14,11 @@ import hu.ait.android.aloke.memorygame.fragment.TutorialFragmentLevels;
  * Created by Aloke on 4/10/15.
  */
 public class TutorialFragmentAdapter extends FragmentPagerAdapter {
+    private Context context;
 
-    public TutorialFragmentAdapter(FragmentManager fm) {
+    public TutorialFragmentAdapter(FragmentManager fm, Context context) {
         super(fm);
+        this.context = context;
     }
 
     @Override
@@ -44,13 +48,13 @@ public class TutorialFragmentAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Levels";
+                return context.getString(R.string.levels_title_tutorial_view_pager);
             case 1:
-                return "Gameplay";
+                return context.getString(R.string.gameplay_title_tutorial_view_pager);
             case 2:
-                return "Highscore";
+                return context.getString(R.string.highscore_title_tutorial_view_pager);
             default:
-                return "Instructions";
+                return context.getString(R.string.levels_title_tutorial_view_pager);
         }
     }
 }

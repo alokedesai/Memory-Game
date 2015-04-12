@@ -29,11 +29,18 @@ import it.sephiroth.android.library.viewrevealanimator.ViewRevealAnimator;
  * Created by Aloke on 4/6/15.
  */
 public class GameAdapter extends BaseAdapter {
+    // the fragment from the activity. Passed as a parameter so we can
+    // access crucial methods to toggle the UI
     private GameFragment fragment;
 
+    // the actual items in our board
     private ArrayList<GameItem> images = new ArrayList<>();
-    private Integer lastGuess;
 
+    /*
+    variables for whether this is first or second guess. If this is the second guess,
+    lastGuess is true and oldAnimator is not null
+     */
+    private Integer lastGuess;
     private ViewRevealAnimator oldAnimator;
 
     // used for the pause delay
@@ -43,9 +50,10 @@ public class GameAdapter extends BaseAdapter {
     // the user cannot click during one second pause after an incorrect guess
     private boolean canClick = true;
 
-
+    //used to for the progress bar and to determine when there's a game over
     private int numPiecesLeft;
     private int numPieces;
+
     private boolean gameStarted = false;
 
     private Context ctx;
@@ -57,14 +65,15 @@ public class GameAdapter extends BaseAdapter {
 
         numPiecesLeft = numPieces;
 
-        GameItem.SquareType.values();
+        GameItem.SquareType[] values = GameItem.SquareType.values();
         // populate images
         for (int i = 0; i < numPieces; i++) {
-            GameItem.SquareType type = GameItem.SquareType.values()[i];
+            GameItem.SquareType type = values[i];
             images.add(new GameItem(type));
             images.add(new GameItem(type));
         }
 
+        // shuffle the images to get a random location of images every game
         Collections.shuffle(images);
     }
 
@@ -94,51 +103,14 @@ public class GameAdapter extends BaseAdapter {
 
             //set View holder
             ViewHolder holder = new ViewHolder();
-            holder.ivMain = ivMain;
-            holder.ivActualImage = ivActualImage;
-            holder.animator = animator;
+            setViewHolder(ivMain, ivActualImage, animator, holder);
 
-            animator.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (!gameStarted) {
-                        gameStarted = true;
-                        fragment.startChronometer();
-                    }
+            /*
+                set the on click listener for the animator. This is where essentially
+                all the logic for the game is
+             */
+            setAnimatorOnClickListener(position, animator);
 
-                    if (canClick && !images.get(position).isChosen()) {
-                        if (lastGuess == null) {
-                            // first guess
-                            images.get(position).setChosen(true);
-                            oldAnimator = animator;
-
-                            animator.showNext();
-                            lastGuess = position;
-                        } else {
-                            int currentValue = images.get(position).getSquareType().getValue();
-                            int lastValue = images.get(lastGuess).getSquareType().getValue();
-
-                            animator.showNext();
-                            images.get(position).setChosen(true);
-
-                            if (currentValue != lastValue) {
-                                // incorrect guess
-                                hideImagesAfterDelay(position, animator);
-                            } else {
-                                // correct guess
-                                numPiecesLeft--;
-
-                                // update the progress bar
-                                double progress = ((double) numPiecesLeft) / numPieces;
-                                fragment.updateProgressBar((int) ((1 - progress) * 100));
-                                checkForGameOver();
-                            }
-
-                            lastGuess = null;
-                        }
-                    }
-                }
-            });
             v.setTag(holder);
         }
 
@@ -152,6 +124,63 @@ public class GameAdapter extends BaseAdapter {
         return v;
     }
 
+    private void setAnimatorOnClickListener(final int position, final ViewRevealAnimator animator) {
+        animator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!gameStarted) {
+                    startGame();
+                }
+
+                if (canClick && !images.get(position).isChosen()) {
+                    if (lastGuess == null) {
+                        // this was the first guess
+                        showImage(position, animator);
+                        oldAnimator = animator;
+
+                        lastGuess = position;
+                    } else {
+                        int currentValue = images.get(position).getSquareType().getValue();
+                        int lastValue = images.get(lastGuess).getSquareType().getValue();
+
+                        showImage(position, animator);
+
+                        if (currentValue != lastValue) {
+                            // incorrect guess
+                            hideImagesAfterDelay(position, animator);
+                        } else {
+                            // correct guess
+                            correctGuess();
+                        }
+
+                        lastGuess = null;
+                    }
+                }
+            }
+        });
+    }
+
+    // set the fields for the viewholder
+    private void setViewHolder(ImageView ivMain, ImageView ivActualImage, ViewRevealAnimator animator, ViewHolder holder) {
+        holder.ivMain = ivMain;
+        holder.ivActualImage = ivActualImage;
+        holder.animator = animator;
+    }
+
+    private void correctGuess() {
+        numPiecesLeft--;
+
+        // update the progress bar
+        double progress = ((double) numPiecesLeft) / numPieces;
+        fragment.updateProgressBar((int) ((1 - progress) * 100));
+        checkForGameOver();
+    }
+
+    private void startGame() {
+        gameStarted = true;
+        fragment.startChronometer();
+    }
+
     private void checkForGameOver() {
         if (numPiecesLeft == 0) {
             String result = fragment.stopChronometer();
@@ -163,6 +192,12 @@ public class GameAdapter extends BaseAdapter {
         }
     }
 
+    private void showImage(int position, ViewRevealAnimator animator) {
+        animator.showNext();
+        images.get(position).setChosen(true);
+    }
+
+    // create the proper fields for a score object and then save using Sugar ORM
     private void createScore(String readableTime) {
         long ellapsedTime = SystemClock.elapsedRealtime() - fragment.getChronometerBase();
         String date = getDateAsString();
