@@ -43,5 +43,6 @@
     <string name="choose_dificulty_text_difficulty_dialog">Choose Difficulty</string>
     <string name="you_must_enter_a_name_error_text">You must enter a name</string>
     <string name="you_must_enter_an_age_error_text">You must enter an age</string>
+    <string name="first_time_update_settings_dialog_message">It looks like this is your first time playing Memory Game! Would you like to update your settings?</string>
 
 </resources>

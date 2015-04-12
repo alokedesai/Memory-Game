@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.Set;
 
 import hu.ait.android.aloke.memorygame.fragment.DifficultyDialog;
+import hu.ait.android.aloke.memorygame.fragment.FirstTimeDialog;
 import hu.ait.android.aloke.memorygame.fragment.MainActivityFragment;
 
 
@@ -26,16 +27,15 @@ public class MainActivity extends ActionBarActivity implements DifficultyDialog.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //redirect to settings if this is the first time the user has used app
-        if (isFirstTimeUser()) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivityForResult(intent, RESULT_SETTINGS);
-        }
         setContentView(R.layout.activity_main);
 
         // start the main activity fragment
         startMainActivityFragment();
+
+        if (isFirstTimeUser()) {
+            FirstTimeDialog firstTimeDialog = new FirstTimeDialog();
+            firstTimeDialog.show(getSupportFragmentManager(), FirstTimeDialog.TAG);
+        }
     }
 
     @Override
@@ -69,5 +69,10 @@ public class MainActivity extends ActionBarActivity implements DifficultyDialog.
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(GameActivity.BOARD_SIZE, numPieces);
         startActivity(intent);
+    }
+
+    public void startSettingsActivity() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivityForResult(intent, MainActivity.RESULT_SETTINGS);
     }
 }

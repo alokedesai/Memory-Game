@@ -93,8 +93,7 @@ public class MainActivityFragment extends Fragment {
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                getActivity().startActivityForResult(intent, MainActivity.RESULT_SETTINGS);
+                ((MainActivity)getActivity()).startSettingsActivity();
             }
         });
     }
