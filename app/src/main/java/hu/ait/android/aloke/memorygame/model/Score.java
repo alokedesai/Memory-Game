@@ -14,33 +14,12 @@ public class Score extends SugarRecord<Score> {
     private Difficulty difficulty;
 
     public enum Difficulty {
-        EASY(0), MEDIUM(1), HARD(2);
-
-        private int value;
-
-        private Difficulty(int value) {
-            this.value = value;
-        }
-
-
-        public static Difficulty fromInt(int value) {
-            for (Difficulty d : Difficulty.values()) {
-                if (d.value == value) {
-                    return d;
-                }
-            }
-            return EASY;
-        }
-
-        public int getValue() {
-            return value;
-        }
+        EASY, MEDIUM, HARD
     }
 
-
+    // constructor for sugar orm 
     public Score() {
     }
-
 
     public Score(String readableTime, long millis, String date, Difficulty difficulty) {
         this.readableTime = readableTime;
