@@ -17,7 +17,7 @@ public class Score extends SugarRecord<Score> {
         EASY, MEDIUM, HARD
     }
 
-    // constructor for sugar orm 
+    // constructor for sugar orm
     public Score() {
     }
 
